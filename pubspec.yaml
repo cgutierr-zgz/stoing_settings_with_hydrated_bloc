@@ -1,0 +1,28 @@
+name: stoing_settings_with_hydrated_bloc
+description: A new Flutter project.
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.18.4 <3.0.0"
+
+dependencies:
+  bloc: ^8.1.0
+  equatable: ^2.0.5
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^8.1.1
+  hydrated_bloc: ^9.0.0
+  path_provider: ^2.0.11
+
+dev_dependencies:
+  bloc_test: ^9.1.0
+  flutter_test:
+    sdk: flutter
+  mocktail: ^0.3.0
+  path: ^1.8.2
+  very_good_analysis: ^3.1.0
+
+flutter:
+  uses-material-design: true
