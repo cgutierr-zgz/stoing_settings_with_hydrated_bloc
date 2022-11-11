@@ -8,6 +8,7 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeMode = context.select((SettingsCubit c) => c.state.themeMode);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings Page'),
