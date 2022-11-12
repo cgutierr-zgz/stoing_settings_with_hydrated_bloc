@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:stoing_settings_with_hydrated_bloc/settings.dart';
 import 'package:stoing_settings_with_hydrated_bloc/settings_cubit.dart';
 
@@ -8,21 +9,57 @@ import 'mocks.dart';
 
 void main() {
   group('SettingsCubit', () {
-    setUp(setUpSettingsCubit);
+    late SettingsCubit cubit;
+    setUp(() {
+      cubit = MockSettingsCubit();
+      when(() => cubit.state).thenReturn(
+        const Settings(themeMode: ThemeMode.system),
+      );
 
+      setUpSettingsCubit();
+    });
     test('initial state theme is system mode', () {
       expect(settingsCubit.state.themeMode, equals(ThemeMode.system));
     });
 
     group('Toogle themeMode', () {
       blocTest<SettingsCubit, Settings>(
-        'updates music volume',
+        'updates themeMode to dark',
         build: SettingsCubit.new,
         act: (bloc) {
           bloc.toggleThemeMode(ThemeMode.dark);
         },
         expect: () {
           return const [Settings(themeMode: ThemeMode.dark)];
+        },
+      );
+
+      blocTest<SettingsCubit, Settings>(
+        'updates themeMode to light',
+        build: SettingsCubit.new,
+        act: (bloc) {
+          bloc.toggleThemeMode(ThemeMode.light);
+        },
+        expect: () {
+          return const [Settings(themeMode: ThemeMode.light)];
+        },
+      );
+
+      blocTest<SettingsCubit, Settings>(
+        'updates themeMode',
+        build: SettingsCubit.new,
+        act: (bloc) {
+          bloc
+            ..toggleThemeMode(ThemeMode.dark)
+            ..toggleThemeMode(ThemeMode.light)
+            ..toggleThemeMode(ThemeMode.system);
+        },
+        expect: () {
+          return const [
+            Settings(themeMode: ThemeMode.dark),
+            Settings(themeMode: ThemeMode.light),
+            Settings(themeMode: ThemeMode.system),
+          ];
         },
       );
     });

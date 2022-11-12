@@ -7,21 +7,13 @@ import 'pump_app.dart';
 
 void main() {
   group('SettingsPage', () {
-    setUp(setUpSettingsCubit);
-
     testWidgets('renders ThemeMode.system as initial state', (tester) async {
-      await tester.pumpApp(
-        const SettingsPage(),
-        settingsCubit: settingsCubit,
-      );
+      await tester.pumpApp(const SettingsPage());
       expect(find.text('Current theme mode: ThemeMode.system'), findsOneWidget);
     });
 
     testWidgets('shows new themeMode when cubit is updated', (tester) async {
-      await tester.pumpApp(
-        const SettingsPage(),
-        settingsCubit: settingsCubit,
-      );
+      await tester.pumpApp(const SettingsPage());
       expect(find.text('Current theme mode: ThemeMode.system'), findsOneWidget);
 
       settingsCubit.toggleThemeMode(ThemeMode.dark);
