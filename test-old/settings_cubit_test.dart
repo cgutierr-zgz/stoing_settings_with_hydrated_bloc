@@ -4,6 +4,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+// ignore: depend_on_referenced_packages
 import 'package:path/path.dart' as path;
 import 'package:stoing_settings_with_hydrated_bloc/settings.dart';
 import 'package:stoing_settings_with_hydrated_bloc/settings_cubit.dart';
@@ -77,6 +78,7 @@ void main() {
         Directory(
           path.join(Directory.current.path, '.cache'),
         ).deleteSync(recursive: true);
+        // ignore: invalid_use_of_visible_for_testing_member
         await HydratedStorage.hive.deleteFromDisk();
       } catch (_) {}
     });
